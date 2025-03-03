@@ -78,15 +78,29 @@ class School {
     }
 }
 
-// Create an instance of the School class
-const school = new School('HMA', 'high', 900);
 
-// Array of substitute teachers
-const subs = ['Ms. Smith', 'Mr. Jones', 'Mrs. Davis'];
+class PrimarySchool extends School {
+    // Private property for pickup policy
+    #pickupPolicy;
+    
+    // Constructor to initialize primary school properties
+    constructor(name, numberOfStudents, pickupPolicy){
+        // Call the parent class constructor with 'primary' as the school level
+        super(name, 'primary', numberOfStudents);
+        this.pickupPolicy = pickupPolicy;
+    }
 
-// Output school details and a randomly selected substitute teacher
-console.log(school.name); // Logs the name of the school
-console.log(school.level); // Logs the level of the school
-console.log(school.numberOfStudents); // Logs the number of students
-console.log(school.quickFacts()); // Logs a quick summary of the school
-console.log(School.pickSubstituteTeacher(subs)); // Logs a randomly selected substitute teacher
+    // Getter for pickup policy
+    get pickupPolicy() {
+        return this.#pickupPolicy;
+    }
+
+    // Setter for pickup policy with validation
+    set pickupPolicy(pickupPolicy) {
+        if (typeof pickupPolicy === 'string' && pickupPolicy.length > 0) {
+            this.#pickupPolicy = pickupPolicy;
+        } else {
+            throw new Error('Invalid: Must be a string');
+        }
+    }
+}
