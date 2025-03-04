@@ -106,17 +106,24 @@ class PrimarySchool extends School {
 }
 
 class HighSchool extends School {
+    // Private property for sports teams
     #sportsTeams;
+    
+    // Constructor to initialize high school properties
     constructor(name, numberOfStudents, sportsTeams) {
+        // Call the parent class constructor with 'high' as the school level
         super(name, 'high', numberOfStudents);
         this.sportsTeams = sportsTeams;
     }
 
+    // Getter for sports teams
     get sportsTeams() {
         return this.#sportsTeams;
     }
 
+    // Setter for sports teams with validation
     set sportsTeams(sportsTeams) {
+        // Validate that input is a non-empty array of strings
         if (!Array.isArray(sportsTeams)) {
             throw new Error('Invalid: Must be an array of strings');
         }
@@ -127,6 +134,7 @@ class HighSchool extends School {
             throw new Error('Invalid: All elements must be strings');
         }
 
-        return this.sportsTeams;
+        // Assign the validated sports teams array
+        this.#sportsTeams = sportsTeams;
     }
 }
