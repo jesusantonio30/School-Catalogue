@@ -104,3 +104,29 @@ class PrimarySchool extends School {
         }
     }
 }
+
+class HighSchool extends School {
+    #sportsTeams;
+    constructor(name, numberOfStudents, sportsTeams) {
+        super(name, 'high', numberOfStudents);
+        this.sportsTeams = sportsTeams;
+    }
+
+    get sportsTeams() {
+        return this.#sportsTeams;
+    }
+
+    set sportsTeams(sportsTeams) {
+        if (!Array.isArray(sportsTeams)) {
+            throw new Error('Invalid: Must be an array of strings');
+        }
+        if (sportsTeams.length === 0){
+            throw new Error('Invalid: Array cannot be empty');
+        }
+        if (!sportsTeams.every( (team) => typeof team === 'string' )) {
+            throw new Error('Invalid: All elements must be strings');
+        }
+
+        return this.sportsTeams;
+    }
+}
